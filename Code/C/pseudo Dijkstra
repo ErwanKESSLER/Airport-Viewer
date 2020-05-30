@@ -1,0 +1,24 @@
+Initialisation(G,sdeb)
+ pour chaque point s de G faire
+    d[s] := infini             /* on initialise les sommets autres que sdeb à infini */
+ fin pour
+ d[sdeb] := 0                  /* la distance au sommet de départ sdeb est nulle */
+
+Trouve_min(Q)
+ mini := infini
+ sommet := -1
+ pour chaque sommet s de Q
+    si d[s] < mini
+    alors 
+        mini := d[s]
+        sommet := s
+ renvoyer sommet;
+ 
+ maj_distances(s1,s2)
+ si d[s2] > d[s1] + Poids(s1,s2)      /* Si la distance de sdeb à s2 est plus grande que */
+                                      /* celle de sdeb à S1 plus celle de S1 à S2 */
+    alors 
+        d[s2] := d[s1] + Poids(s1,s2) /* On prend ce nouveau chemin qui est plus court */
+        prédécesseur[s2] := s1        /* En notant par où on passe */
+ 
+ 

@@ -1,0 +1,18 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+.idea
+*.iws
+*.ipr
+# Ignore Gradle build output directory
+build
+#Ignore jars
+*.jar
+#add the library directory
+!libs/*.jar
+
+
+#ignore idea
+*.ipr
+*.iws
+
+out

@@ -1,0 +1,35 @@
+Pseudo code algorithme A* pour calculer le plus court chemin dans un graphe orienté:
+
+   Structure nœud = {
+      x, y: Nombre
+      cout, heuristique: Nombre
+   }
+
+   depart = Nœud(x=_, y=_, cout=0, heuristique=0)
+
+   Fonction compare2Noeuds(n1:Nœud, n2:Nœud)
+       si n1.heuristique < n2.heuristique 
+           retourner 1
+       ou si n1.heuristique  == n2.heuristique 
+           retourner 0
+       sinon
+           retourner -1
+
+   Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)
+       closedList = File()
+       openList = FilePrioritaire(comparateur=compare2Noeuds)
+       openList.ajouter(depart)
+       tant que openList n'est pas vide
+           u = openList.depiler()
+           si u.x == objectif.x et u.y == objectif.y
+               reconstituerChemin(u)
+               terminer le programme
+           pour chaque voisin v de u dans g
+               si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
+                    neRienFaire()
+               sinon
+                    v.cout = u.cout +1 
+                    v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
+                    openList.ajouter(v)
+           closedList.ajouter(u)
+       terminer le programme (avec erreur)

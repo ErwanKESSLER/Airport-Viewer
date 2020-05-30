@@ -1,0 +1,34 @@
+ALL CONTRIBUTIONS SHOULD HAVE A MEANINGFULL COMMIT MESSAGE!
+
+We observe a strict policy against bad or poorly worded comment/variables/commit messages... 
+
+All commit should be done accordingly to each directory and follow the build systems and 
+rigourous testing.
+
+How to Commit:
+
+Please select your branch first so : `git checkout <your name>`(to see available branches do `git branch`).
+
+Your branch may be behind what you have on the gitlab so do `git pull` then `git rebase origin/master` (to have everything up to date with master) or `git rebase origin/dev` (to be with dev).
+
+Do your stuff and commit only files accordingly with `git add <file|files|*|.>` (dont commit stuff related to your IDE or file not as sources: add everything to the corresponding .gitignore if necessary).  
+
+Do `git status` and verify your stuff before committing.
+
+Once done do `git commit -m <meaningful message>`.
+
+Then do `git push origin <your name>` to push your branch to the gitlab.
+
+---
+
+In case you want to publish it for the other you need to push to the dev staging branch so you need to do first `git checkout Dev`.
+
+Then do `git merge <your name>` and once the merge is done (you may need to resolve conflicts) please do `git push origin master`.
+
+Once on the dev staging, tests will run (yours and the others) if all tests pass and you have the approval to push to master then you can start a merge request to merge into `master`
+
+At this point there will be a review and if it is agreed then change will be pushed.
+
+AT ALL TIME MASTER SHOULD BE FUNCTIONAL!
+
+To do a merge request you need to go on the gitlab page and go in your repository/branch and click on the green butto

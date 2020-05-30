@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.192" fx:controller="com.PPII.GUI.SelectGui">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button layoutX="6.0" layoutY="24.0" mnemonicParsing="false" onAction="#getAirportId" text="Find by Id" />
+            <Button fx:id="airportall" layoutX="117.0" layoutY="24.0" mnemonicParsing="false" onAction="#getAllAiport" text="Find all" />
+            <Separator layoutY="95.0" prefHeight="17.0" prefWidth="473.0" />
+            <TextField fx:id="input" layoutX="12.0" layoutY="711.0" prefHeight="23.0" prefWidth="422.0" />
+            <Label layoutX="12.0" layoutY="6.0" text="Airport" />
+            <Button layoutX="206.0" layoutY="23.0" mnemonicParsing="false" onAction="#getAiportCountry" text="Find by Country" />
+            <Button layoutX="358.0" layoutY="23.0" mnemonicParsing="false" onAction="#getAirportCity" text="Find By City" />
+            <Button layoutX="74.0" layoutY="63.0" mnemonicParsing="false" onAction="#getAirportArea" text="Find by area" />
+            <Button layoutX="223.0" layoutY="63.0" mnemonicParsing="false" onAction="#getAirportRadius" text="Find by radius" />
+            <Separator layoutY="221.0" prefHeight="17.0" prefWidth="473.0" />
+            <Separator layoutY="520.0" prefHeight="17.0" prefWidth="473.0" />
+            <Label layoutX="15.0" layoutY="112.0" text="Route" />
+            <Button layoutX="14.0" layoutY="141.0" mnemonicParsing="false" onAction="#getRouteId" text="Find by Id" />
+            <Button layoutX="109.0" layoutY="141.0" mnemonicParsing="false" onAction="#getAllRoute" text="Find all" />
+            <Button layoutX="194.0" layoutY="142.0" mnemonicParsing="false" onAction="#getSourceAirport" text="Find by source airport" />
+            <Button layoutX="15.0" layoutY="179.0" mnemonicParsing="false" onAction="#getDestinationAirport" text="Find by destination airport" />
+            <Button layoutX="206.0" layoutY="179.0" mnemonicParsing="false" onAction="#getRouteAirline" text="Find by airline" />
+            <Label layoutX="15.0" layoutY="238.0" text="Airline" />
+            <Button layoutX="14.0" layoutY="267.0" mnemonicParsing="false" onAction="#getAirlineId" text="Find by Id" />
+            <Button layoutX="109.0" layoutY="267.0" mnemonicParsing="false" onAction="#getAllAirline" text="Find all" />
+            <Separator layoutY="296.0" prefHeight="17.0" prefWidth="473.0" />
+            <Label layoutX="15.0" layoutY="313.0" text="Country" />
+            <Button layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#getCountryId" text="Find by Id" />
+            <Button layoutX="117.0" layoutY="338.0" mnemonicParsing="false" onAction="#getAllCountry" text="Find all" />
+            <Separator layoutY="373.0" prefHeight="17.0" prefWidth="473.0" />
+            <Label layoutX="15.0" layoutY="390.0" text="Planes List" />
+            <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#getPlanesId" text="Find by Id" />
+            <Button layoutX="117.0" layoutY="408.0" mnemonicParsing="false" onAction="#getAllPlanes" text="Find all" />
+            <Separator layoutY="449.0" prefHeight="17.0" prefWidth="473.0" />
+            <Label layoutX="15.0" layoutY="466.0" text="Cities" />
+            <Button layoutX="14.0" layoutY="491.0" mnemonicParsing="false" onAction="#getCitiesId" text="Find by Id" />
+            <Button layoutX="109.0" layoutY="483.0" mnemonicParsing="false" onAction="#getAllcities" text="Find all" />
+            <Button layoutX="91.0" layoutY="747.0" mnemonicParsing="false" onAction="#clearTable" prefHeight="37.0" prefWidth="230.0" text="CLEAR" />
+            <Label layoutX="14.0" layoutY="528.0" text="FlightNumber" />
+            <Button layoutX="15.0" layoutY="554.0" mnemonicParsing="false" onAction="#getFNid" text="Find by Id" />
+            <Button layoutX="109.0" layoutY="554.0" mnemonicParsing="false" onAction="#getAllFN" text="Find all" />
+            <Button layoutX="194.0" layoutY="554.0" mnemonicParsing="false" onAction="#getFNbyAirline" text="Find by Airline Id" />
+            <Separator layoutX="6.0" layoutY="582.0" prefHeight="17.0" prefWidth="473.0" />
+            <Label layoutX="18.0" layoutY="599.0" text="RouteList" />
+            <Button layoutX="14.0" layoutY="616.0" mnemonicParsing="false" onAction="#getRoutesId" text="Find by Id" />
+            <Separator layoutX="6.0" layoutY="638.0" prefHeight="17.0" prefWidth="473.0" />
+            <Button layoutX="138.0" layoutY="653.0" mnemonicParsing="false" onAction="#searchRoute" text="Display" />
+            <Label layoutX="17.0" layoutY="655.0" text="Between 2 cities" />
+            <Separator layoutY="685.0" prefHeight="17.0" prefWidth="473.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TableView fx:id="table" layoutX="1.0" layoutY="-1.0" prefHeight="800.0" prefWidth="1119.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

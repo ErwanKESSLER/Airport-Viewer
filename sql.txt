@@ -1,0 +1,193 @@
+DROP TABLE airport CASCADE CONSTRAINTS;
+DROP TABLE Localization CASCADE CONSTRAINTS;
+DROP TABLE Airline CASCADE CONSTRAINTS;
+DROP TABLE Country CASCADE CONSTRAINTS;
+DROP TABLE Route CASCADE CONSTRAINTS;
+DROP TABLE RouteList CASCADE CONSTRAINTS;
+DROP TABLE EquipmentList CASCADE CONSTRAINTS;
+DROP TABLE FlightNumber CASCADE CONSTRAINTS;
+DROP TABLE plane CASCADE CONSTRAINTS;
+
+CREATE TABLE airport
+(
+    id        number(5) PRIMARY KEY,
+    Name      varchar2(200),
+    IATA      varchar2(3),
+    ICAO      varchar2(4),
+    latitude  number(*, 15),
+    longitude number(*, 15),
+    altitude  number,
+    CityId    number NOT NULL
+);
+
+CREATE TABLE Localization
+(
+    CityId    number PRIMARY KEY,
+    CityName  varchar2(200),
+    CountryId varchar2(3) NOT NULL,
+    Timezone  number(*, 5)
+);
+
+CREATE TABLE Country
+(
+    CountryId       varchar2(3) PRIMARY KEY,
+    CoutryName      varchar2(200),
+    CountryRealName varchar2(200),
+    Latitude        number(*,15),
+    Longitude       number(*,15)
+);
+
+CREATE TABLE Airline
+(
+    id        integer PRIMARY KEY,
+    Name      varchar2(200),
+    Alias     varchar2(100),
+    IATA      varchar2(2),
+    ICAO      varchar2(3),
+    Callsign  varchar2(200),
+    CountryId varchar2(3),
+    Active    varchar2(1)
+);
+
+CREATE TABLE Route
+(
+    RouteId              number PRIMARY KEY,
+    AirlineId            number(5) NOT NULL,
+    SourceAirportId      number(5) NOT NULL,
+    DestinationAirportId number(5) NOT NULL,
+    Escales              number,
+    Codeshare            varchar2(1),
+    EquipmentsId         number
+);
+
+CREATE TABLE FlightNumberIATA
+(
+    IATA         varchar2(3) PRIMARY KEY,
+    FlightNumber varchar2(10),
+    RouteId      number UNIQUE NOT NULL
+);
+
+CREATE TABLE FlightNumberICAO
+(
+    ICAO         varchar2(4) PRIMARY KEY,
+    FlightNumber varchar2(10),
+    RouteId      number UNIQUE NOT NULL
+);
+
+CREATE TABLE plane
+(
+    PlaneId number PRIMARY KEY,
+    IATA    varchar2(3),
+    ICAO    varchar2(4),
+    Name    varchar2(200)
+);
+
+CREATE TABLE RouteList
+(
+    RouteId     number PRIMARY KEY,
+    AirportId   number(5),
+    RouteIdNext number UNIQUE NOT NULL
+);
+
+CREATE TABLE EquipmentList
+(
+    EquipmentId   number PRIMARY KEY,
+    PlaneId       number        NOT NULL,
+    EquipmentNext number UNIQUE NOT NULL
+);
+
+ALTER TABLE airport
+    ADD FOREIGN KEY (CityId) REFERENCES Localization (CityId);
+
+ALTER TABLE Localization
+    ADD FOREIGN KEY (CountryId) REFERENCES Country (CountryId);
+
+ALTER TABLE Airline
+    ADD FOREIGN KEY (CountryId) REFERENCES Country (CountryId);
+
+ALTER TABLE Airline
+    ADD FOREIGN KEY (IATA) REFERENCES FlightNumberIATA (IATA);
+
+ALTER TABLE Airline
+    ADD FOREIGN KEY (ICAO) REFERENCES FlightNumberICAO (ICAO);
+
+ALTER TABLE Route
+    ADD FOREIGN KEY (AirlineId) REFERENCES Airline (id);
+
+ALTER TABLE Route
+    ADD FOREIGN KEY (EquipmentsId) REFERENCES EquipmentList (EquipmentId);
+
+ALTER TABLE EquipmentList
+    ADD FOREIGN KEY (EquipmentId) REFERENCES EquipmentList (EquipmentNext);
+
+ALTER TABLE EquipmentList
+    ADD FOREIGN KEY (PlaneId) REFERENCES plane (PlaneId);
+
+ALTER TABLE Route
+    ADD FOREIGN KEY (SourceAirportId) REFERENCES airport (id);
+
+ALTER TABLE Route
+    ADD FOREIGN KEY (DestinationAirportId) REFERENCES airport (id);
+
+ALTER TABLE RouteList
+    ADD FOREIGN KEY (AirportId) REFERENCES airport (id);
+
+ALTER TABLE FlightNumberIATA
+    ADD FOREIGN KEY (RouteId) REFERENCES RouteList (RouteId);
+
+ALTER TABLE FlightNumberICAO
+    ADD FOREIGN KEY (RouteId) REFERENCES RouteList (RouteId);
+
+ALTER TABLE RouteList
+    ADD FOREIGN KEY (RouteIdNext) REFERENCES RouteList (RouteId);
+
+ALTER TABLE Route
+    ADD FOREIGN KEY (RouteId) REFERENCES FlightNumberIATA (RouteId);
+
+ALTER TABLE Route
+    ADD FOREIGN KEY (RouteId) REFERENCES FlightNumberICAO (RouteId);
+
+
+
+
+SELECT * FROM ALL_TABLES WHERE OWNER='HEY';
+
+insert into Country values ('MDc','Madagascar','Madagascar','-20',47.5);
+SELECT *FROM Country;
+
+SELECT TABLE_NAME FROM ALL_TABLES WHERE OWNER='GRP5';
+
+SELECT CityId,Name FROM Airport WHERE ID=7541;
+SELECT * FROM Localization WHERE CityName='Beijing';
+
+SELECT COUNT(*) FROM RouteList;
+SELECT COUNT(*) FROM FlightNumber;
+
+SELECT * FROM airport;
+SELECT * FROM airport;
+
+SELECT * FROM EquipmentList WHERE EquipmentId=67090;
+SELECT * FROM Route ;
+
+SELECT  C.id FROM Airline C WHERE C.id NOT IN (SELECT A.Airlineid FROM FlightNumber A);
+
+SELECT * FROM Country WHERE CoutryName ;
+SELECT * FROM plane WHERE PlaneId=170;
+
+SELECT P.* FROM airport P WHERE P.Latitude>41.006783940812696 AND P.Latitude<58.99321605918732 AND P.longitude>49.755811239899565 AND P.Longitude<50.244188760100435 AND acos(sin(0.8726646259971648)*sin(P.latitude*3.14159265358979323846/180)+cos(0.8726646259971648)*cos(P.latitude*3.14159265358979323846/180)*cos(P.longitude*3.14159265358979323846/180-0.8726646259971648))<=0.15696123057604772;
+
+SELECT P.* FROM airport P, Localization L WHERE P.CityId=L.CityId AND L.CityName='Paris';
+
+ SELECT * FROM Country WHERE Countryid='ABW';
+SELECT *FROM plane;
+
+
+SELECT *FROM Country;
+
+SELECT TABLE_NAME FROM ALL_TABLES WHERE OWNER='GRP5';
+
+SELECT CityId,Name FROM Airport WHERE ID=7541;
+SELECT * FROM Localization WHERE CityName='Beijing';
+
+SELECT COUNT(*)FROM FLIGHTNUMBER;
+
